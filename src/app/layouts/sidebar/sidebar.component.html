@@ -1,0 +1,37 @@
+<div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+<div class="sidebar-header position-relative">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="logo">
+            <a routerLink="/dashboard" routerLinkActive="router-link-active" ><img src="assets/images/logo.svg" width="100%" alt="Logo" srcset=""></a>
+        </div>
+        <div class="sidebar-toggler  x">
+            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+        </div>
+    </div>
+</div>
+<div class="sidebar-menu">
+    <ul class="menu">
+        <li class="sidebar-title">Menu</li>
+        <li *ngFor="let item of navigation.navigation"
+            class="sidebar-item" [routerLinkActive]="'active'" [ngClass]="item.type == 'group' ? 'has-sub' : ''">
+            <a class='sidebar-link' *ngIf="item.type == 'item'" [routerLink]="item.url">
+                <i class="bi bi-grid-fill" [ngClass]="item.icon"></i>
+                <span>{{item.title}}</span>
+            </a>
+            <a class='sidebar-link sub-menu' *ngIf="item.type == 'group'" (click)="item.show = !item.show" >
+                <i class="bi bi-grid-fill" [ngClass]="item.icon"></i>
+                <span>{{item.title}}</span>
+            </a>
+            <ul class="submenu" [ngClass]="item.show ? 'active' : ''" *ngIf="item.type == 'group'">
+                <li class="submenu-item" *ngFor="let children of item.children">
+                    <a [routerLink]="item.url + children.url">
+                        <span>{{children.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</div>
+    </div>
